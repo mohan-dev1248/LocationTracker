@@ -1,11 +1,28 @@
+import 'package:background_location/background_location.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
+  BackgroundLocation.setAndroidNotification(
+    title: "Notification title",
+    message: "Notification message",
+    icon: "@mipmap/ic_launcher",
+  );
+  BackgroundLocation.setAndroidConfiguration(1000);
+  BackgroundLocation.startLocationService();
+  BackgroundLocation.getLocationUpdates((location) {
+    final _location = location;
+    BackgroundLocation.setAndroidNotification(
+      title: "Notification title",
+      message: "${_location.latitude}, ${_location.longitude}",
+      icon: "@mipmap/ic_launcher",
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +34,7 @@ class MyApp extends StatelessWidget {
         // application has a blue toolbar. Then, without quitting the app, try
         // changing the primarySwatch below to Colors.green and then invoke
         // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // or simply save your changes/ to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,

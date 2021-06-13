@@ -1,6 +1,7 @@
 # background_location_notifier
 
 A flutter application that displays the mobile's current location in a notification.
+Using the library background_location
 
 ## Getting Started
 
